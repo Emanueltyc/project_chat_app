@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 
 import {
   Box,
@@ -9,12 +9,21 @@ import {
   Tabs,
   Tab,
   Text,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import Login from "../components/Authentication/Login";
-import Signup from "../components/Authentication/Signup";
+import Login from '../components/Authentication/Login';
+import Signup from '../components/Authentication/Signup';
+import { useHistory } from 'react-router-dom';
 
 const HomePage = () => {
+  const history = useHistory();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+
+    if (user) history.push('/chat');
+  }, [history]);
+
   return (
     <Container maxW="xl" centerContent>
       <Box
@@ -28,7 +37,7 @@ const HomePage = () => {
         borderWidth="1px"
       >
         <Text fontSize="4xl" fontFamily="work sans" color="black">
-          Quick Chat
+          Quick
         </Text>
       </Box>
       <Box
