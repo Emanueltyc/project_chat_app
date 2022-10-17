@@ -7,7 +7,9 @@ import {
   InputRightElement,
   useToast,
   VStack,
+  Icon,
 } from '@chakra-ui/react';
+import { BsEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -44,10 +46,6 @@ const Login = () => {
       const config = {
         headers: {
           'Content-type': 'application/json',
-        },
-        data: {
-          email,
-          password,
         },
       };
 
@@ -108,7 +106,11 @@ const Login = () => {
             />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" onClick={handelShowClick}>
-                {show ? 'Hide' : 'Show'}
+                {show ? (
+                  <Icon as={BsFillEyeSlashFill} />
+                ) : (
+                  <Icon as={BsEyeFill} />
+                )}
               </Button>
             </InputRightElement>
           </InputGroup>
@@ -123,18 +125,6 @@ const Login = () => {
           isLoading={loading}
         >
           Login
-        </Button>
-
-        <Button
-          variant="solid"
-          colorScheme="red"
-          width="100%"
-          onClick={() => {
-            setEmail('guest@example.com');
-            setPassword('123456');
-          }}
-        >
-          Get Guest User Credentials
         </Button>
       </VStack>
     </div>

@@ -12,7 +12,9 @@ import {
   InputRightElement,
   useToast,
   VStack,
+  Icon,
 } from '@chakra-ui/react';
+import { BsEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -203,7 +205,11 @@ const Signup = () => {
             />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" onClick={handelShowClick}>
-                {show ? 'Hide' : 'Show'}
+                {show ? (
+                  <Icon as={BsFillEyeSlashFill} />
+                ) : (
+                  <Icon as={BsEyeFill} />
+                )}
               </Button>
             </InputRightElement>
           </InputGroup>
