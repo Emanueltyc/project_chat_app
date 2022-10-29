@@ -21,7 +21,7 @@ const HomePage = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('userInfo'));
 
-    if (user) history.push('/chat');
+    if (user) history.push('/chats');
   }, [history]);
 
   return (
