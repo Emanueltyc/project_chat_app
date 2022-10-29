@@ -58,11 +58,21 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 const allUsers = asyncHandler(async (req, res) => {
+    if (req.query.search.trim() === '') {
+        res.status(401);
+        res.send('Search cannot be empty!');
+    }
+
     const keyword = req.query.search
         ? {
               $or: [
                   { name: { $regex: req.query.search, $options: 'i' } },
-                  { email: { $regex: req.query.search, $options: 'i' } },
+                  {
+                      email: {
+                          $regex: `/^[${req.query.search}]+@[a-z]+\\.([a-z]+)?$/i`,
+                          $options: 'i',
+                      },
+                  },
               ],
           }
         : {};
