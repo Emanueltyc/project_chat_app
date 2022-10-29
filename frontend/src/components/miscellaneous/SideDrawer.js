@@ -16,18 +16,20 @@ import {
   DrawerBody,
   Input,
   useToast,
+  Spinner,
 } from '@chakra-ui/react';
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import { LogoIcon } from './LogoIcon';
 import { useDisclosure } from '@chakra-ui/hooks';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
-import { ChatState } from '../../Context/ChatProvider';
+import { ChatContext } from '../../Context/ChatProvider';
 import ProfileModal from './ProfileModal';
 import { useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 import ChatLoading from '../ChatLoading';
-import UserListItem from '../UserAvatar/UserListItem';
+import UserListItem from '../UserItem/UserListItem';
 
 const SideDrawer = () => {
   const [search, setSearch] = useState('');
@@ -37,7 +39,12 @@ const SideDrawer = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const ChatState = () => {
+    return useContext(ChatContext);
+  };
+
   const { user, setSelectedChat, chats, setChats } = ChatState();
+
   const history = useHistory();
   const toast = useToast();
 
@@ -90,6 +97,8 @@ const SideDrawer = () => {
 
       const { data } = await axios.post('/api/chat', { userId }, { headers });
 
+      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
+
       setSelectedChat(data);
       setLoadingChat(false);
       onClose();
@@ -111,46 +120,58 @@ const SideDrawer = () => {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        bg="white"
+        bg="#23272A"
         w="100%"
         p="5px 10px 5px 10px"
-        borderWidth="5px"
+        color="#F6F6F6"
+        boxShadow="0px 4px 5px 0px rgba(35, 39, 42, 0.75)"
       >
-        <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
-          <Button variant="ghost" onClick={onOpen}>
-            <i class="fas fa-search"></i>
+        <Tooltip
+          label="Pesquisar usuários para conversar"
+          hasArrow
+          placement="bottom-end"
+        >
+          <Button
+            variant="ghost"
+            onClick={onOpen}
+            _hover={{ bgColor: '#40e0d0' }}
+          >
+            <i className="fas fa-search"></i>
             <Text display={{ base: 'none', md: 'flex' }} px="4">
-              Search User
+              Pesquisar usuário
             </Text>
           </Button>
         </Tooltip>
 
-        <Text fontSize="2xl" fontFamily="Work sans">
-          Quick
-        </Text>
+        <LogoIcon fontSize="4xl" m={1} />
 
         <div>
           <Menu>
             <MenuButton p={1}>
-              <BellIcon fontSize="2xl" m={1} />
+              <BellIcon fontSize="2xl" m={1} color="blackAlpha" />
             </MenuButton>
             {/* <MenuList></MenuList> */}
           </Menu>
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            <MenuButton
+              bgColor="#CC66CC"
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+            >
               <Avatar
                 size="sm"
                 cursor="pointer"
                 name={user.name}
                 src={user.pic}
+                border="1px"
               />
             </MenuButton>
-            <MenuList>
+            <MenuList color="#23272A" bgColor="#F6F6F6">
               <ProfileModal user={user}>
-                <MenuItem>My Profile</MenuItem>
+                <MenuItem>Meu perfil</MenuItem>
               </ProfileModal>
               <MenuDivider />
-              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+              <MenuItem onClick={logoutHandler}>logout</MenuItem>
             </MenuList>
           </Menu>
         </div>
@@ -160,7 +181,7 @@ const SideDrawer = () => {
         <DrawerOverlay />
 
         <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">Procurar usuários</DrawerHeader>
 
           <DrawerBody>
             <Box display="flex" pb={2}>
@@ -183,6 +204,7 @@ const SideDrawer = () => {
                 />
               ))
             )}
+            {loadingChat && <Spinner ml="auto" display="flex" />}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
