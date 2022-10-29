@@ -3,8 +3,22 @@
 .App {
   min-height: 100vh;
   display: flex;
-  background-image: url('./background.jpg');
+  /* background-image: url('./images/background.jpg'); */
+  /* background-color: rgb(35, 39, 42); */
+  background-color: #36393F;
   background-size: cover;
   background-position: center;
   color: black;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.281);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
