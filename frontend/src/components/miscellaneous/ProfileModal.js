@@ -27,6 +27,9 @@ const ProfileModal = ({ user, children }) => {
           display={{ base: 'flex' }}
           icon={<ViewIcon />}
           onClick={onOpen}
+          color="#40e0d0"
+          bgColor="#36393F"
+          _hover={{ bgColor: '#40e0d0', color: '#36393F' }}
         />
       )}
 
@@ -69,7 +72,6 @@ const ProfileModal = ({ user, children }) => {
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
