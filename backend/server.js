@@ -1,6 +1,6 @@
 import express from 'express';
 import { connectDB } from './config/db.js';
-import { chatRoutes, userRoutes } from './routes/index.js';
+import { chatRoutes, userRoutes, messageRoutes } from './routes/index.js';
 import { notFound, errorHandler } from './middlewares/erroMiddleware.js';
 import 'dotenv/config';
 import 'colors';
@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/message', messageRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

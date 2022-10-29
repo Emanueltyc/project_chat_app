@@ -1,4 +1,5 @@
-import { router as userRoutes } from './userRoutes.js';
-import { router as chatRoutes } from './chatRoutes.js';
+import userRoutes from './userRoutes.js';
+import chatRoutes from './chatRoutes.js';
+import messageRoutes from './messageRoutes.js';
 
-export { userRoutes, chatRoutes };
+export { userRoutes, chatRoutes, messageRoutes };
