@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema(
         pic: {
             type: String,
             default:
-                'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icons-25.jpg',
+                'https://res.cloudinary.com/emanueltyc/image/upload/v1666995688/default_user_pic_auvthk.jpg',
         },
     },
     { timestamps: true }
