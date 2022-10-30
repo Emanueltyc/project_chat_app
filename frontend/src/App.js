@@ -9,6 +9,7 @@ function App() {
   const [user, setUser] = useState();
   const [selectedChat, setSelectedChat] = useState();
   const [chats, setChats] = useState();
+  const [notification, setNotification] = useState([]);
 
   const history = useHistory();
 
@@ -28,6 +29,8 @@ function App() {
         setSelectedChat,
         chats,
         setChats,
+        notification,
+        setNotification,
       }}
     >
       <div className="App">
