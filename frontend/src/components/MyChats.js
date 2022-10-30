@@ -18,10 +18,9 @@ import GroupChatModal from './miscellaneous/GroupChatModal';
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
-  const ChatState = () => {
-    return useContext(ChatContext);
-  };
-  const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+
+  const { selectedChat, setSelectedChat, user, chats, setChats } =
+    useContext(ChatContext);
 
   const toast = useToast();
 
@@ -105,7 +104,6 @@ const MyChats = ({ fetchAgain }) => {
                 px={3}
                 py={2}
                 borderRadius="lg"
-                // borderBottom="1px"
                 borderColor="GrayText"
                 key={chat._id}
               >
